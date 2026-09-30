@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagrama de Venn – Aula preparatória para concursos</title>
+<style>
+:root{--bg:#f4f6f9;--card:#fff;--ink:#16213a;--mut:#56617a;--a:#0f8b8d;--b:#6a4c93;--hl:#f2b705;--line:#d9dfe9}
+@media(prefers-color-scheme:dark){:root{--bg:#10151f;--card:#182030;--ink:#e8ecf5;--mut:#9aa5bd;--line:#2a3550;--a:#3cc4c6;--b:#a98be0}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 Georgia,"Times New Roman",serif}
+main{max-width:860px;margin:0 auto;padding:0 20px 60px}
+header{padding:56px 20px 36px;max-width:860px;margin:0 auto}
+h1{font:800 clamp(2rem,6vw,3.2rem)/1.1 "Trebuchet MS",system-ui,sans-serif;margin:0 0 12px}
+header p{color:var(--mut);margin:0;max-width:60ch}
+.prof-name{font-weight:700;color:var(--a);margin-bottom:8px;font-family:"Trebuchet MS",sans-serif;font-size:1.1rem}
+h2{font:700 1.6rem/1.2 "Trebuchet MS",system-ui,sans-serif;margin:48px 0 12px;padding-left:14px;border-left:6px solid var(--hl)}
+h3{font:700 1.1rem "Trebuchet MS",system-ui,sans-serif;margin:22px 0 6px}
+p,li{max-width:70ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin:16px 0}
+.formula{font:600 1.15rem "Cambria Math",Georgia,serif;text-align:center;background:var(--card);border:2px solid var(--hl);border-radius:10px;padding:14px;margin:16px 0;overflow-x:auto}
+.ops{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.ops figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center}
+.ops figcaption{font-size:.9rem;color:var(--mut);line-height:1.35}
+.ops b{display:block;color:var(--ink);font-family:"Trebuchet MS",sans-serif}
+svg{max-width:100%;height:auto}
+.tip{border-left:5px solid var(--a);background:var(--card);padding:12px 18px;border-radius:0 10px 10px 0;margin:16px 0}
+.warn{border-left-color:#d64545}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 20px;margin:14px 0}
+summary{cursor:pointer;font-weight:700;font-family:"Trebuchet MS",sans-serif}
+summary:focus-visible{outline:3px solid var(--hl);outline-offset:4px}
+details[open] summary{margin-bottom:10px}
+.ans{border-top:1px dashed var(--line);padding-top:10px;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+th{background:var(--card)}
+.wrap{overflow-x:auto}
+ol.steps li{margin-bottom:6px}
+.sa{fill:var(--a)}.sb{fill:var(--b)}.ln{stroke:var(--ink);fill:none;stroke-width:1.6}.tx{fill:var(--ink);font:700 15px "Trebuchet MS",sans-serif;text-anchor:middle}
+@media print{body{background:#fff}details{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+<h1>Diagrama de Venn</h1>
+<p class="prof-name">Professor Gabriel Pedro</p>
+<p>Aula preparatória para concursos: teoria dos conjuntos, problemas com número de elementos e diagramas lógicos, com exemplos resolvidos e exercícios comentados.</p>
+</header>
+<main>
+
+<h2>1. O que é e por que cai em prova</h2>
+<p>O diagrama de Venn representa <b>conjuntos</b> por círculos dentro de um retângulo, o <b>universo (U)</b>. As regiões onde os círculos se sobrepõem mostram elementos que pertencem a mais de um conjunto.</p>
+<p>Bancas como CESPE/Cebraspe, FCC, FGV, VUNESP e IBFC cobram o tema em <b>Raciocínio Lógico</b> de duas formas: (1) problemas de contagem ("quantas pessoas gostam de A e de B?") e (2) argumentos lógicos com "todo", "algum" e "nenhum".</p>
+
+<h2>2. Operações básicas</h2>
+<div class="ops" id="ops"></div>
+<div class="wrap"><table>
+<tr><th>Símbolo</th><th>Leitura</th><th>Significado</th></tr>
+<tr><td>A ∪ B</td><td>A união B</td><td>elementos de A <b>ou</b> de B (ou de ambos)</td></tr>
+<tr><td>A ∩ B</td><td>A interseção B</td><td>elementos de A <b>e</b> de B ao mesmo tempo</td></tr>
+<tr><td>A − B</td><td>A menos B</td><td>elementos que estão só em A</td></tr>
+<tr><td>Aᶜ</td><td>complementar de A</td><td>elementos do universo que não estão em A</td></tr>
+<tr><td>A ⊂ B</td><td>A está contido em B</td><td>todo elemento de A também é de B</td></tr>
+</table></div>
+<div class="tip"><b>Atenção à linguagem:</b> "ou" em conjuntos é inclusivo (inclui quem está nos dois). "Apenas A" ou "somente A" significa A − B.</div>
+
+<h2>3. Fórmulas de contagem</h2>
+<h3>Dois conjuntos</h3>
+<div class="formula">n(A ∪ B) = n(A) + n(B) − n(A ∩ B)</div>
+<p>Somamos os dois conjuntos e subtraímos a interseção, porque ela foi contada duas vezes.</p>
+<h3>Três conjuntos</h3>
+<div class="formula">n(A ∪ B ∪ C) = n(A) + n(B) + n(C) − n(A∩B) − n(A∩C) − n(B∩C) + n(A∩B∩C)</div>
+<h3>Universo</h3>
+<div class="formula">n(U) = n(A ∪ B ∪ …) + n(nenhum)</div>
+
+<h2>4. Método para resolver qualquer problema</h2>
+<ol class="steps">
+<li>Desenhe os círculos e o retângulo do universo.</li>
+<li>Preencha <b>de dentro para fora</b>: comece pela interseção de todos os conjuntos.</li>
+<li>Depois preencha as interseções de dois a dois, <b>subtraindo</b> o que já foi colocado no centro.</li>
+<li>Por fim, preencha as regiões "somente": total do conjunto menos tudo o que já está nele.</li>
+<li>O que sobrar do universo vai fora dos círculos ("nenhum").</li>
+</ol>
+<div class="tip warn"><b>Erro clássico:</b> colocar o total do conjunto (por exemplo, 100) direto na região "somente A". Esse número já inclui as interseções.</div>
+
+<h2>5. Exemplo resolvido com três conjuntos</h2>
+<div class="card">
+<p>Em uma pesquisa com 200 alunos: 100 falam inglês, 80 espanhol e 60 francês; 40 falam inglês e espanhol, 30 inglês e francês, 20 espanhol e francês; e 10 falam os três idiomas. Quantos não falam nenhum deles?</p>
+<svg viewBox="0 0 400 310" width="400" role="img" aria-label="Diagrama de Venn com três conjuntos: inglês, espanhol e francês">
+<rect x="4" y="4" width="392" height="302" rx="8" class="ln" stroke-dasharray="5 4"/>
+<circle cx="150" cy="130" r="90" class="sa" fill-opacity=".35"/>
+<circle cx="250" cy="130" r="90" class="sb" fill-opacity=".35"/>
+<circle cx="200" cy="215" r="90" fill="#f2b705" fill-opacity=".4"/>
+<circle cx="150" cy="130" r="90" class="ln"/><circle cx="250" cy="130" r="90" class="ln"/><circle cx="200" cy="215" r="90" class="ln"/>
+<g class="tx"><text x="105" y="105">40</text><text x="295" y="105">30</text><text x="200" y="272">20</text>
+<text x="200" y="98">30</text><text x="150" y="195">20</text><text x="250" y="195">10</text><text x="200" y="150">10</text><text x="365" y="290">40</text></g>
+<g class="tx" style="font-size:13px;font-weight:400"><text x="60" y="55">Inglês</text><text x="340" y="55">Espanhol</text><text x="80" y="290">Francês</text></g>
+</svg>
+<p><b>Resolução:</b></p>
+<ol class="steps">
+<li>Os três: <b>10</b>.</li>
+<li>Somente inglês e espanhol: 40 − 10 = <b>30</b>. Somente inglês e francês: 30 − 10 = <b>20</b>. Somente espanhol e francês: 20 − 10 = <b>10</b>.</li>
+<li>Somente inglês: 100 − 10 − 30 − 20 = <b>40</b>. Somente espanhol: 80 − 10 − 30 − 10 = <b>30</b>. Somente francês: 60 − 10 − 20 − 10 = <b>20</b>.</li>
+<li>Falam pelo menos um idioma: 10 + 30 + 20 + 10 + 40 + 30 + 20 = 160.</li>
+<li>Nenhum: 200 − 160 = <b>40</b>.</li>
+</ol>
+<p>Conferência pela fórmula: 100 + 80 + 60 − 40 − 30 − 20 + 10 = 160. ✔</p>
+</div>
+
+<h2>6. Diagramas lógicos: todo, algum e nenhum</h2>
+<div class="ops" id="logic"></div>
+<div class="tip"><b>Regras de ouro:</b>
+<ul>
+<li>"Todo A é B" <b>não</b> permite concluir "todo B é A".</li>
+<li>"Algum A é B" equivale a "algum B é A" (é simétrico).</li>
+<li>"Nenhum A é B" equivale a "nenhum B é A" (também simétrico).</li>
+<li>Negação de "Todo A é B": <b>Algum A não é B</b>. Negação de "Algum A é B": <b>Nenhum A é B</b>.</li>
+</ul></div>
+<p><b>Como resolver:</b> desenhe primeiro as premissas do jeito mais "apertado" possível e depois teste se a conclusão vale em <b>todos</b> os desenhos possíveis. Se houver um desenho em que ela falha, a conclusão não é válida.</p>
+
+<h2>7. Dicas de prova</h2>
+<ul>
+<li>Leia a pergunta antes: ela diz qual região você precisa achar.</li>
+<li>Palavras-chave: "somente/apenas" = exclusivo; "pelo menos um" = união; "exatamente dois" = soma das interseções duplas sem o centro; "nenhum" = fora dos círculos.</li>
+<li>Se o enunciado disser "todos gostam de pelo menos um", o fora dos círculos vale zero.</li>
+<li>No Cebraspe (certo/errado), um único contraexemplo já torna o item errado.</li>
+<li>Sempre confira: a soma de todas as regiões deve ser igual ao total do universo.</li>
+</ul>
+
+<h2>8. Exercícios (clique para ver o gabarito)</h2>
+
+<details><summary>Questão 1</summary>
+<p>Num grupo de 100 pessoas, 60 leem o jornal A, 50 leem o jornal B e 20 não leem nenhum dos dois. Quantas leem os dois?</p>
+<p>a) 20 &nbsp; b) 25 &nbsp; c) 30 &nbsp; d) 35 &nbsp; e) 40</p>
+<div class="ans" hidden><b>Gabarito: C (30).</b> Leem pelo menos um: 100 − 20 = 80. Então 60 + 50 − x = 80, logo x = 30. Somente A = 30 e somente B = 20.</div>
+<button onclick="this.previousElementSibling.hidden=false;this.remove()">Mostrar resposta</button></details>
+
+<details><summary>Questão 2</summary>
+<p>Em uma turma de 60 alunos, 35 gostam de Matemática, 28 gostam de Português e 10 não gostam de nenhuma das duas. Quantos gostam das duas?</p>
+<p>a) 8 &nbsp; b) 10 &nbsp; c) 13 &nbsp; d) 15 &nbsp; e) 18</p>
+<div class="ans" hidden><b>Gabarito: C (13).</b> Gostam de pelo menos uma: 60 − 10 = 50. Então 35 + 28 − x = 50, logo x = 13.</div>
+<button onclick="this.previousElementSibling.hidden=false;this.remove()">Mostrar resposta</button></details>
+
+<details><summary>Questão 3</summary>
+<p>Usando os dados do exemplo da seção 5, quantos alunos falam <b>exatamente dois</b> idiomas?</p>
+<p>a) 40 &nbsp; b) 50 &nbsp; c) 60 &nbsp; d) 90 &nbsp; e) 100</p>
+<div class="ans" hidden><b>Gabarito: C (60).</b> Exatamente dois = somente inglês/espanhol (30) + somente inglês/francês (20) + somente espanhol/francês (10) = 60. O erro comum é somar 40 + 30 + 20 = 90, que inclui o centro três vezes.</div>
+<button onclick="this.previousElementSibling.hidden=false;this.remove()">Mostrar resposta</button></details>
+
+<details><summary>Questão 4 (estilo Cebraspe)</summary>
+<p>Premissas: "Todo policial é concursando" e "Nenhum concursando é preguiçoso". Julgue: "Nenhum policial é preguiçoso."</p>
+<p>( ) Certo &nbsp; ( ) Errado</p>
+<div class="ans" hidden><b>Gabarito: Certo.</b> Policiais estão dentro de concursando, e concursando não tem interseção com preguiçoso. Logo, o círculo dos policiais também não toca o dos preguiçosos.</div>
+<button onclick="this.previousElementSibling.hidden=false;this.remove()">Mostrar resposta</button></details>
+
+<details><summary>Questão 5 (estilo Cebraspe)</summary>
+<p>Premissas: "Todo A é B" e "Algum B é C". Julgue: "Algum A é C."</p>
+<p>( ) Certo &nbsp; ( ) Errado</p>
+<div class="ans" hidden><b>Gabarito: Errado.</b> É possível desenhar A dentro de B sem tocar em C, com a parte de B que toca C ficando fora de A. Como existe um desenho em que a conclusão falha, ela não é necessariamente verdadeira.</div>
+<button onclick="this.previousElementSibling.hidden=false;this.remove()">Mostrar resposta</button></details>
+
+</main>
+<script>
+const S=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}"`;
+function two(fill){return `<svg viewBox="0 0 180 100" width="170" aria-hidden="true">${fill}</svg>`}
+const bg='style="fill:var(--card)"';
+const A='<circle cx="70" cy="50" r="38" ', B='<circle cx="110" cy="50" r="38" ';
+const cl='<clipPath id="ca"><circle cx="70" cy="50" r="38"/></clipPath>';
+const lines=A+'class="ln"/>'+B+'class="ln"/><text x="48" y="54" class="tx">A</text><text x="132" y="54" class="tx">B</text>';
+const ops=[
+ ['A ∪ B','União: tudo o que está em A ou em B.',A+'class="sa"/>'+B+'class="sa"/>'+lines],
+ ['A ∩ B','Interseção: só a região comum.',cl+A+'class="ln"/>'+B+'class="ln"/><circle cx="110" cy="50" r="38" clip-path="url(#ca)" fill="#f2b705"/>'+lines.replace(/<circle[^>]*\/>/g,'')+A+'class="ln"/>'+B+'class="ln"/>'],
+ ['A − B','Diferença: está em A e não está em B.',A+'class="sa"/>'+B+bg+'/>'+lines],
+ ['Aᶜ','Complementar: o que está no universo e fora de A.','<rect x="4" y="4" width="172" height="92" class="sb"/>'+A+bg+'/>'+A+'class="ln"/><text x="70" y="54" class="tx">A</text>']
+];
+document.getElementById('ops').innerHTML=ops.map(o=>`<figure>${two(o[2])}<figcaption><b>${o[0]}</b>${o[1]}</figcaption></figure>`).join('');
+const L=[
+ ['Todo A é B','A dentro de B.','<circle cx="90" cy="50" r="42" class="sb" fill-opacity=".4"/><circle cx="90" cy="50" r="42" class="ln"/><circle cx="90" cy="55" r="20" class="sa"/><text x="90" y="59" class="tx" style="fill:#fff">A</text><text x="150" y="30" class="tx">B</text>'],
+ ['Algum A é B','Os círculos se cruzam.',A+'class="sa" fill-opacity=".5"/>'+B+'class="sb" fill-opacity=".5"/>'+lines],
+ ['Nenhum A é B','Círculos separados.','<circle cx="50" cy="50" r="34" class="sa"/><circle cx="130" cy="50" r="34" class="sb"/><text x="50" y="55" class="tx" style="fill:#fff">A</text><text x="130" y="55" class="tx" style="fill:#fff">B</text>']
+];
+document.getElementById('logic').innerHTML=L.map(o=>`<figure>${two(o[2])}<figcaption><b>${o[0]}</b>${o[1]}</figcaption></figure>`).join('');
+</script>
+</body>
+</html>
